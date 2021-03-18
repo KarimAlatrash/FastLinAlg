@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/karimalatrash/Documents/2A/ECE204/FastLinAlg/Linear_solve.hpp
+linalg.h
+/Users/karimalatrash/Documents/2A/ECE204/FastLinAlg/linalg.h
+
+/Users/karimalatrash/Documents/2A/ECE204/FastLinAlg/linalg.h
+iostream
+-
+
+/Users/karimalatrash/Documents/2A/ECE204/FastLinAlg/main.cpp
+iostream
+-
+ctime
+-
+Linear_solve.hpp
+/Users/karimalatrash/Documents/2A/ECE204/FastLinAlg/Linear_solve.hpp
+
