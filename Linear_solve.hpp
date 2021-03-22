@@ -41,6 +41,8 @@ Linear_solve::Linear_solve(double array[], unsigned int n) {
     //gets the inverse of array matrix
     A_inv = A.solve_identity();
 
+    //std::cout<<A_inv<<std::endl;
+
     //loads inverse into array
     for (int i = 0; i<n; i++) {
         for (int j = 0; j<n; j++) {
@@ -71,6 +73,7 @@ void Linear_solve::update_vec(double *target, double* soln) {
                 soln[j] -= A_inv_arr[n_*j + i]*old_target[i];
                 soln[j] += A_inv_arr[n_*j + i]*target[i];
             }
+            old_target[i] = target[i];
         }
     }
 }
@@ -168,33 +171,21 @@ matrix matrix::solve_identity( /*matrix const &target*/ ) const {
 
     return result;
 }
-/*
-double Linear_solve::norm(double *arr, unsigned int length) {
-    double ret_val{0};
-    for(int i{0}; i<length; i++) {
-        ret_val+=pow(arr[i], 2);
 
-    }
-    return sqrt(ret_val);
-
-}*/
 
 void Linear_solve::solve(double *target, double* soln) {
 
-    if(first_solve) {
+    if(!first_solve) {
+        update_vec(target, soln);
+    } else {
         vector v{n_, target};
         vector u = A.solve_no_pivoting(v);
         for(int i{0}; i<n_; i++) {
             soln[i]=u(i);
         }
         first_solve = false;
-    } else {
-        update_vec(target, soln);
     }
 
-    for (int i{0}; i<n_; i++) {
-        old_target[i] = target[i];
-    }
 
 
 }
