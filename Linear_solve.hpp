@@ -75,6 +75,7 @@ void Linear_solve::update_vec(double *target, double* soln) {
             }
             old_target[i] = target[i];
         }
+
     }
 }
 
@@ -177,11 +178,13 @@ void Linear_solve::solve(double *target, double* soln) {
 
     if(!first_solve) {
         update_vec(target, soln);
+
     } else {
         vector v{n_, target};
         vector u = A.solve_no_pivoting(v);
         for(int i{0}; i<n_; i++) {
             soln[i]=u(i);
+            old_target[i] = target[i];
         }
         first_solve = false;
     }

@@ -5,7 +5,7 @@
 int main();
 
 int main() {
-    /*
+
     double B_arr[10][10]{
             { 6.089502917902452e+00, 7.218673877078088e-01, 6.777704853247750e-01, 4.068304308354909e-01, 6.700134299123348e-01,
                     -2.752482138616758e-01, 6.820532620920170e-01, 3.320679716578119e-01, 7.852919389703084e-01, -5.383597975402287e-01},
@@ -42,12 +42,11 @@ int main() {
             -0.3176202010795363,
             -0.06905718316128884
     };
-    vector a{ 10, a_arr };
-    vector soln_vec{ 10 };
 
 
 
-    std::cout<<B.solve(a)<<std::endl;*/
+
+    //std::cout<<B.solve(a)<<std::endl;
 
     double A[100]{
             6.089502917902452e+00, 7.218673877078088e-01, 6.777704853247750e-01, 4.068304308354909e-01, 6.700134299123348e-01,
@@ -88,11 +87,23 @@ int main() {
     double soln[10];
 
 
+
+
+    unsigned int score = 0;
+
     long start{ std::time( nullptr ) };
-    for ( unsigned int count{0}; count < 1000000000; ++count ) {
+    for ( unsigned int count{0}; count < 100; ++count ) {
         target[std::rand() % 10] += 0.1*((2.0*rand())/RAND_MAX - 1.0); // Change one entry in the target vector
+        vector a{ 10, target };
         obj.solve( target, soln ); // Solve the system of linear equations
+        vector soln_vec{ 10, soln };
+
+        if(abs( soln_vec.norm() - B.solve(a).norm() ) <= 1E-12)
+            score++;
+
     }
+
+    std::cout<<"SCORE IS: "<<score<<std::endl;
 
     std::cout << (std::time( nullptr ) - start) << std::endl; // print out the time elapsed
     for ( unsigned int k{0}; k < 10; ++k ) { // print out the last target vector
